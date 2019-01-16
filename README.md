@@ -1,4 +1,3 @@
-d
 
 - Module: where Daggger looks for a proper way to instantiate the object. Tells it HOW to create the object
 
@@ -10,13 +9,6 @@ d
     DaggerAppComponent.builder
     ```
 
-
-
-
-
-
-
-    ​		
 
 - Dependent classes must be declared in the component, so that Dagger can use the public variables and initialize them
 
@@ -73,7 +65,8 @@ As soon as the injection occurs, methods with 'inject' will be called with the i
 
 - Instead of the default constructor injection, can make things more explicit and add
 
-  ```java  @Provides
+  ``` java 
+  @Provides
   public CoffeeHelper CoffeeHelper(int quantity, Flavor flavor){
      return new CoffeeHelper(quantity, flavor);
   }
