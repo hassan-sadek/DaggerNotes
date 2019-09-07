@@ -1,9 +1,26 @@
 
 - Module: where Daggger looks for a proper way to instantiate the object. Tells it HOW to create the object
 
-- Component: is the bridge between module and the classes that need it. As you cant use the module directly. Component takes the modules and gives the dependency back to the dependenct classes. If a component has multiple modules that are dependent on others, they are declared in here
+- Component: is the bridge between module and the classes that need it. As you cant use the module directly. Component takes the modules and gives the dependency back to the dependent classes. If a component has multiple modules that are dependent on others, they are declared in here
 
-  - When createing the component, if a module needs to have values passed in, ie context, then you need to create AND pass in the module , rather than letting the system create one automatically ie
+Essentially it is the factory. Can use it without a module, as long as the class has a default constructor with @inject
+This tells dagger that when we request an object from Dagger, it calls a constructor to provide the object.
+
+
+- Note that it doesnt have to be the default constructor with no arguments. Can also have something like this where the constuctor has an argument. BUT this argument must have a constructor with @inject so Dagger knows
+```java
+ @Inject
+    CommandRouter(HelloWorldCommand helloWorldCommand) {
+        commands.put(helloWorldCommand.key(), helloWorldCommand);
+    }
+  ```
+
+```java
+//to create the component
+AppComponent appComponent = DaggerAppComponent.create()
+```
+
+  - When creating the component, if a module needs to have values passed in, ie context, then you need to create AND pass in the module , rather than letting the system create one automatically ie
 
     ```java
     DaggerAppComponent.builder
