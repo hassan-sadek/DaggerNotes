@@ -3,11 +3,14 @@
 
 - Component: is the bridge between module and the classes that need it. As you cant use the module directly. Component takes the modules and gives the dependency back to the dependent classes. If a component has multiple modules that are dependent on others, they are declared in here
 
+
+
 Essentially it is the factory. Can use it without a module, as long as the class has a default constructor with @inject
 This tells dagger that when we request an object from Dagger, it calls a constructor to provide the object.
 
 
 - Note that it doesnt have to be the default constructor with no arguments. Can also have something like this where the constuctor has an argument. BUT this argument must have a constructor with @inject so Dagger knows
+[Could use provides. but why not?]
 ```java
  @Inject
     CommandRouter(HelloWorldCommand helloWorldCommand) {
@@ -19,6 +22,17 @@ This tells dagger that when we request an object from Dagger, it calls a constru
 //to create the component
 AppComponent appComponent = DaggerAppComponent.create()
 ```
+
+- What happens if you want to inject in an interface? You cant have an @inject constructor on an interface. But you can use the ```@Binds``` method in the module
+
+```java
+@Module
+abstract public class HelloWorldModule {
+    @Binds
+    abstract Command helloWorldCommand(HelloWorldCommand command);
+}
+```
+
 
   - When creating the component, if a module needs to have values passed in, ie context, then you need to create AND pass in the module , rather than letting the system create one automatically ie
 
