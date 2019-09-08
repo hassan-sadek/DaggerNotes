@@ -4,13 +4,14 @@
 - Component: is the bridge between module and the classes that need it. As you cant use the module directly. Component takes the modules and gives the dependency back to the dependent classes. If a component has multiple modules that are dependent on others, they are declared in here
 
 
-
 Essentially it is the factory. Can use it without a module, as long as the class has a default constructor with @inject
 This tells dagger that when we request an object from Dagger, it calls a constructor to provide the object.
 
 
 - Note that it doesnt have to be the default constructor with no arguments. Can also have something like this where the constuctor has an argument. BUT this argument must have a constructor with @inject so Dagger knows
-[Could use provides. but why not?]
+
+- *Provides* are concrete methods that tell Dagger how to create the object. Unlike binds, Provides methods can actually create the object and return. Binds methods can only be abstract methods
+
 ```java
  @Inject
     CommandRouter(HelloWorldCommand helloWorldCommand) {
@@ -110,9 +111,20 @@ to the module. This is essentially doing the same thing as the constructor injec
 
 
 - Singleton. If it is placed before a method which provides  a dependency, Dagger will create a singleton during init. of the COMPONENT. So if other components are created, they will have a different singleton.
+- Singleton can be used on the class declaration of type that has an inject constructor OR on a binds/provides method
   - if one provide method has scope annotation, then the component must have the same annotation
   - can also use the concept of 'scopes', where Singletons exist while a corresponding scope exists ie
     - a global scope (used across the whole application)
     - a local scope (which is used across a few activities)
   - The way this is done is via the components. ie a component created at the application level, a component created at multiple activity level, a component created for a specific screen
 
+
+-Scoping
+- scoping comes down to proper use of Components
+ - there are two ways to use components
+  - Subcomponents
+  - Components dependencies
+
+- Subcomponents
+
+Subcomponents
