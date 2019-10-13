@@ -117,16 +117,24 @@ to the module. This is essentially doing the same thing as the constructor injec
     - a global scope (used across the whole application)
     - a local scope (which is used across a few activities)
   - The way this is done is via the components. ie a component created at the application level, a component created at multiple activity level, a component created for a specific screen
+  
+https://miro.medium.com/max/954/1*TNcwU_fri3QC_s58yXdpxw.png
 
 
+### Scoping
 
--Scoping
 - allows you to 'preserve' the object instance for the life of the scope
+- the issue is defining a relationship between the different scopes, as the ones at the bottom need to
+still have the scope of the ones higher up
+
 - scoping comes down to proper use of Components
  - there are two ways to use components
   - Subcomponents
   - Components dependencies
 
-- Subcomponents
+#### Component Dependency
 
-Subcomponents
+- a component can establish a parent-child dependency between itself and other components.
+
+Suupose we have an Activity with an associated Presenter. ie WarriorActivity and WarriorPresenter
+The presenter is only designed for the warrior activity, so we can scope it as @WarriorScreenScope
