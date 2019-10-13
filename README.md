@@ -119,7 +119,9 @@ to the module. This is essentially doing the same thing as the constructor injec
   - The way this is done is via the components. ie a component created at the application level, a component created at multiple activity level, a component created for a specific screen
 
 
+
 -Scoping
+- allows you to 'preserve' the object instance for the life of the scope
 - scoping comes down to proper use of Components
  - there are two ways to use components
   - Subcomponents
